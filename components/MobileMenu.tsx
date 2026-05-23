@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { X, Phone, MessageSquare } from "lucide-react";
+import { X, Phone, MessageSquare, ChevronDown } from "lucide-react";
 import { site } from "@/data/site";
 import Logo from "./Logo";
 
@@ -17,6 +17,7 @@ export default function MobileMenu({ open, onClose }: Props) {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
+  const [practiceOpen, setPracticeOpen] = useState(false);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -38,6 +39,15 @@ export default function MobileMenu({ open, onClose }: Props) {
     // close on route change, no matter how it was triggered
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
+
+  useEffect(() => {
+    if (!open) {
+      // collapse the practice areas submenu whenever the drawer closes
+      // so it opens fresh next time
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setPracticeOpen(false);
+    }
+  }, [open]);
 
   if (!mounted) return null;
 
@@ -88,21 +98,49 @@ export default function MobileMenu({ open, onClose }: Props) {
               <Link href="/about" className="block py-2 font-medium text-navy">About</Link>
             </li>
             <li>
-              <Link href="/practice-areas" className="block py-2 font-medium text-navy">Practice Areas</Link>
-              <ul className="ml-3 pl-3 border-l border-border space-y-1 mt-1 mb-2">
-                {site.nav
-                  .find((n) => n.label === "Practice Areas")
-                  ?.children?.map((child) => (
-                    <li key={child.href}>
-                      <Link
-                        href={child.href}
-                        className="block py-1.5 text-[0.95rem] text-ink"
-                      >
-                        {child.label}
-                      </Link>
-                    </li>
-                  ))}
-              </ul>
+              <button
+                type="button"
+                className="w-full flex items-center justify-between py-2 font-medium text-navy"
+                aria-expanded={practiceOpen}
+                aria-controls="mobile-practice-sublist"
+                onClick={() => setPracticeOpen((v) => !v)}
+              >
+                <span>Practice Areas</span>
+                <ChevronDown
+                  size={18}
+                  aria-hidden
+                  className={`transition-transform duration-200 ${
+                    practiceOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+              {practiceOpen && (
+                <ul
+                  id="mobile-practice-sublist"
+                  className="ml-3 pl-3 border-l border-border space-y-1 mt-1 mb-2"
+                >
+                  <li>
+                    <Link
+                      href="/practice-areas"
+                      className="block py-1.5 text-[0.95rem] font-medium text-navy"
+                    >
+                      View all practice areas
+                    </Link>
+                  </li>
+                  {site.nav
+                    .find((n) => n.label === "Practice Areas")
+                    ?.children?.map((child) => (
+                      <li key={child.href}>
+                        <Link
+                          href={child.href}
+                          className="block py-1.5 text-[0.95rem] text-ink"
+                        >
+                          {child.label}
+                        </Link>
+                      </li>
+                    ))}
+                </ul>
+              )}
             </li>
             <li>
               <Link href="/reviews" className="block py-2 font-medium text-navy">Reviews</Link>
