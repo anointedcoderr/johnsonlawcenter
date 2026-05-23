@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Phone } from "lucide-react";
 import { site } from "@/data/site";
+import Reveal from "./Reveal";
 
 type Props = {
   eyebrow?: string;
@@ -42,24 +43,34 @@ export default function Hero({
         />
         <div className="relative container-narrow py-20 md:py-28">
           <div className="max-w-2xl">
-            {eyebrow && <p className="eyebrow text-gold">{eyebrow}</p>}
-            <h1 className="mt-3 text-cream">{headline}</h1>
-            <p className="mt-5 text-cream/85 text-lg leading-relaxed max-w-xl">
-              {subtext}
-            </p>
+            {eyebrow && (
+              <Reveal>
+                <p className="eyebrow text-gold">{eyebrow}</p>
+              </Reveal>
+            )}
+            <Reveal delay={120}>
+              <h1 className="mt-3 text-cream">{headline}</h1>
+            </Reveal>
+            <Reveal delay={240}>
+              <p className="mt-5 text-cream/85 text-lg leading-relaxed max-w-xl">
+                {subtext}
+              </p>
+            </Reveal>
             {showPrimaryCTAs && (
-              <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
-                <Link href="/contact" className="btn btn-primary">
-                  Request a Free Consultation
-                </Link>
-                <a
-                  href={site.phones.office.tel}
-                  className="btn btn-on-dark"
-                >
-                  <Phone size={16} aria-hidden />
-                  Call {site.phones.office.display}
-                </a>
-              </div>
+              <Reveal delay={360}>
+                <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
+                  <Link href="/contact" className="btn btn-primary">
+                    Request a Free Consultation
+                  </Link>
+                  <a
+                    href={site.phones.office.tel}
+                    className="btn btn-on-dark"
+                  >
+                    <Phone size={16} aria-hidden />
+                    Call {site.phones.office.display}
+                  </a>
+                </div>
+              </Reveal>
             )}
           </div>
         </div>
@@ -70,11 +81,19 @@ export default function Hero({
   return (
     <section className="relative isolate bg-navy text-cream">
       <div className="container-narrow py-16 md:py-24">
-        {eyebrow && <p className="eyebrow text-gold">{eyebrow}</p>}
-        <h1 className="mt-3 text-cream max-w-3xl">{headline}</h1>
-        <p className="mt-5 text-cream/85 text-lg leading-relaxed max-w-2xl">
-          {subtext}
-        </p>
+        {eyebrow && (
+          <Reveal>
+            <p className="eyebrow text-gold">{eyebrow}</p>
+          </Reveal>
+        )}
+        <Reveal delay={120}>
+          <h1 className="mt-3 text-cream max-w-3xl">{headline}</h1>
+        </Reveal>
+        <Reveal delay={240}>
+          <p className="mt-5 text-cream/85 text-lg leading-relaxed max-w-2xl">
+            {subtext}
+          </p>
+        </Reveal>
       </div>
     </section>
   );

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { ChevronDown, Phone } from "lucide-react";
 import { site } from "@/data/site";
 import MobileMenu from "./MobileMenu";
+import Logo from "./Logo";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -37,13 +38,8 @@ export default function Header() {
       ].join(" ")}
     >
       <div className="container-narrow flex items-center justify-between gap-6 py-4 md:py-5">
-        <Link href="/" className="flex flex-col leading-tight shrink-0">
-          <span className="font-serif text-lg md:text-xl font-bold text-navy whitespace-nowrap">
-            Johnson Law Center
-          </span>
-          <span className="text-[0.7rem] md:text-xs uppercase tracking-[0.18em] text-muted">
-            Gloucester, VA
-          </span>
+        <Link href="/" className="shrink-0" aria-label="Johnson Law Center home">
+          <Logo variant="light" />
         </Link>
 
         <nav

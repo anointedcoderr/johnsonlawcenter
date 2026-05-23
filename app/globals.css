@@ -20,6 +20,7 @@
 
 :root {
   color-scheme: light;
+  --ease-out-soft: cubic-bezier(0.2, 0, 0.2, 1);
 }
 
 html {
@@ -268,12 +269,37 @@ label {
 .reveal {
   opacity: 0;
   transform: translateY(8px);
-  transition: opacity 600ms ease, transform 600ms ease;
+  transition: opacity 600ms var(--ease-out-soft), transform 600ms var(--ease-out-soft);
+  will-change: opacity, transform;
 }
 
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (hover: hover) {
+  .card-lift {
+    transition: border-color 200ms var(--ease-out-soft),
+      transform 200ms var(--ease-out-soft);
+  }
+  .card-lift:hover {
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 .has-mobile-cta {

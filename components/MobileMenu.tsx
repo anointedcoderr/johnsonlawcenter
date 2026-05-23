@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { X, Phone, MessageSquare } from "lucide-react";
 import { site } from "@/data/site";
+import Logo from "./Logo";
 
 type Props = {
   open: boolean;
@@ -67,9 +68,7 @@ export default function MobileMenu({ open, onClose }: Props) {
         ].join(" ")}
       >
         <div className="flex items-center justify-between px-5 py-4 border-b border-border">
-          <span className="font-serif text-lg font-bold text-navy">
-            Johnson Law Center
-          </span>
+          <Logo variant="light" />
           <button
             type="button"
             onClick={onClose}

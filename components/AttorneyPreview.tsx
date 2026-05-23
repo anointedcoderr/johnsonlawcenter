@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { site } from "@/data/site";
+import Reveal from "./Reveal";
 
 export default function AttorneyPreview() {
   return (
     <section className="section bg-ivory">
       <div className="container-narrow grid md:grid-cols-12 gap-8 md:gap-12 items-center">
-        <div className="md:col-span-5">
+        <Reveal className="md:col-span-5">
           <div
             className="aspect-[4/5] rounded-md border border-border overflow-hidden relative bg-navy"
             aria-hidden
@@ -25,9 +26,9 @@ export default function AttorneyPreview() {
               </p>
             </div>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="md:col-span-7">
+        <Reveal className="md:col-span-7" delay={150}>
           <p className="eyebrow">Meet the Attorney</p>
           <h2 className="mt-2 text-navy">Meet {site.attorney.name}</h2>
           <span className="divider-rule" />
@@ -45,7 +46,7 @@ export default function AttorneyPreview() {
             View Attorney Profile
             <ArrowRight size={16} aria-hidden />
           </Link>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

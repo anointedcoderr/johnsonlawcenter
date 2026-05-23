@@ -10,7 +10,7 @@ export default function PracticeAreaCard({ area }: Props) {
   return (
     <Link
       href={`/practice-areas/${area.slug}`}
-      className="card group flex flex-col h-full"
+      className="card card-lift group flex flex-col h-full"
     >
       <h3 className="font-serif text-xl text-navy">{area.shortLabel}</h3>
       <span className="divider-rule" />

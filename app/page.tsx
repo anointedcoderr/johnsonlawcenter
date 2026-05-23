@@ -8,6 +8,7 @@ import AttorneyPreview from "@/components/AttorneyPreview";
 import ReviewCard from "@/components/ReviewCard";
 import ConsultationForm from "@/components/ConsultationForm";
 import CTASection from "@/components/CTASection";
+import Reveal from "@/components/Reveal";
 import { practiceAreas } from "@/data/practiceAreas";
 import { reviews, reviewNote } from "@/data/reviews";
 import { site } from "@/data/site";
@@ -58,8 +59,10 @@ export default function Home() {
             lede="We focus on accident and injury matters across the Middle Peninsula and Virginia courts."
           />
           <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {practiceAreas.map((area) => (
-              <PracticeAreaCard key={area.slug} area={area} />
+            {practiceAreas.map((area, i) => (
+              <Reveal key={area.slug} delay={i * 80}>
+                <PracticeAreaCard area={area} />
+              </Reveal>
             ))}
           </div>
           <div className="mt-10">
@@ -107,13 +110,13 @@ export default function Home() {
             heading="A clear three step process"
           />
           <ol className="mt-10 grid md:grid-cols-3 gap-5">
-            {steps.map((step) => (
-              <li key={step.n} className="card flex flex-col">
+            {steps.map((step, i) => (
+              <Reveal key={step.n} as="li" delay={i * 100} className="card flex flex-col">
                 <p className="font-serif text-3xl text-gold">{step.n}</p>
                 <h3 className="mt-2 font-serif text-xl text-navy">{step.title}</h3>
                 <span className="divider-rule" />
                 <p className="text-ink text-[0.95rem] leading-relaxed">{step.body}</p>
-              </li>
+              </Reveal>
             ))}
           </ol>
         </div>
@@ -129,8 +132,10 @@ export default function Home() {
             lede="A small selection of feedback from clients of the firm."
           />
           <div className="mt-10 grid md:grid-cols-3 gap-5">
-            {reviews.map((review) => (
-              <ReviewCard key={review.author} review={review} />
+            {reviews.map((review, i) => (
+              <Reveal key={review.author} delay={i * 100}>
+                <ReviewCard review={review} />
+              </Reveal>
             ))}
           </div>
           <p className="mt-8 text-xs text-muted max-w-2xl">{reviewNote}</p>

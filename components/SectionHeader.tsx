@@ -1,3 +1,5 @@
+import Reveal from "./Reveal";
+
 type Props = {
   eyebrow?: string;
   heading: string;
@@ -13,7 +15,7 @@ export default function SectionHeader({
 }: Props) {
   const alignment = align === "center" ? "text-center mx-auto" : "text-left";
   return (
-    <div className={`max-w-2xl ${alignment}`}>
+    <Reveal className={`max-w-2xl ${alignment}`}>
       {eyebrow && <p className="eyebrow">{eyebrow}</p>}
       <h2 className="mt-2 text-navy">{heading}</h2>
       {lede && (
@@ -21,6 +23,6 @@ export default function SectionHeader({
           {lede}
         </p>
       )}
-    </div>
+    </Reveal>
   );
 }
