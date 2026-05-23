@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { X, Phone, MessageSquare } from "lucide-react";
 import { site } from "@/data/site";
 
@@ -14,6 +15,12 @@ type Props = {
 export default function MobileMenu({ open, onClose }: Props) {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -27,15 +34,17 @@ export default function MobileMenu({ open, onClose }: Props) {
 
   useEffect(() => {
     if (open) onClose();
-    // close on route change, regardless of how it was triggered
+    // close on route change, no matter how it was triggered
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
-  return (
+  if (!mounted) return null;
+
+  const menu = (
     <div
       id="mobile-menu"
       className={[
-        "fixed inset-0 z-50 xl:hidden transition-opacity duration-200",
+        "fixed inset-0 z-[60] xl:hidden transition-opacity duration-200",
         open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
       ].join(" ")}
       aria-hidden={!open}
@@ -53,7 +62,7 @@ export default function MobileMenu({ open, onClose }: Props) {
         tabIndex={-1}
         className={[
           "absolute right-0 top-0 h-full w-[88%] max-w-sm bg-cream shadow-xl outline-none flex flex-col",
-          "transition-transform duration-200",
+          "transition-transform duration-200 ease-out",
           open ? "translate-x-0" : "translate-x-full",
         ].join(" ")}
       >
@@ -124,4 +133,6 @@ export default function MobileMenu({ open, onClose }: Props) {
       </div>
     </div>
   );
+
+  return createPortal(menu, document.body);
 }

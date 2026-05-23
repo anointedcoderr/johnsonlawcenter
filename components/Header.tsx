@@ -32,7 +32,7 @@ export default function Header() {
   return (
     <header
       className={[
-        "sticky top-0 z-40 bg-cream/95 backdrop-blur-sm border-b transition-colors",
+        "sticky top-0 z-40 bg-cream border-b transition-colors",
         scrolled ? "border-border" : "border-transparent",
       ].join(" ")}
     >
