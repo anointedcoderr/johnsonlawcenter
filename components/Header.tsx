@@ -36,9 +36,9 @@ export default function Header() {
         scrolled ? "border-border" : "border-transparent",
       ].join(" ")}
     >
-      <div className="container-narrow flex items-center justify-between py-4 md:py-5">
-        <Link href="/" className="flex flex-col leading-tight">
-          <span className="font-serif text-lg md:text-xl font-bold text-navy">
+      <div className="container-narrow flex items-center justify-between gap-6 py-4 md:py-5">
+        <Link href="/" className="flex flex-col leading-tight shrink-0">
+          <span className="font-serif text-lg md:text-xl font-bold text-navy whitespace-nowrap">
             Johnson Law Center
           </span>
           <span className="text-[0.7rem] md:text-xs uppercase tracking-[0.18em] text-muted">
@@ -46,7 +46,10 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav aria-label="Primary" className="hidden lg:flex items-center gap-7">
+        <nav
+          aria-label="Primary"
+          className="hidden xl:flex items-center gap-7"
+        >
           {site.nav.map((item) => {
             if (item.children) {
               return (
@@ -58,7 +61,7 @@ export default function Header() {
                 >
                   <Link
                     href={item.href}
-                    className="inline-flex items-center gap-1 text-[0.95rem] font-medium text-ink hover:text-navy"
+                    className="inline-flex items-center gap-1 text-[0.95rem] font-medium text-ink hover:text-navy whitespace-nowrap"
                     aria-haspopup="menu"
                     aria-expanded={openDropdown}
                   >
@@ -76,7 +79,7 @@ export default function Header() {
                             key={child.href}
                             href={child.href}
                             role="menuitem"
-                            className="block px-4 py-2 text-[0.92rem] text-ink hover:text-navy hover:bg-ivory"
+                            className="block px-4 py-2 text-[0.92rem] text-ink hover:text-navy hover:bg-ivory whitespace-nowrap"
                           >
                             {child.label}
                           </Link>
@@ -91,7 +94,7 @@ export default function Header() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="text-[0.95rem] font-medium text-ink hover:text-navy"
+                className="text-[0.95rem] font-medium text-ink hover:text-navy whitespace-nowrap"
               >
                 {item.label}
               </Link>
@@ -99,22 +102,26 @@ export default function Header() {
           })}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden xl:flex items-center gap-4 shrink-0">
           <a
             href={site.phones.office.tel}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-navy hover:text-gold-dark"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-navy hover:text-gold-dark whitespace-nowrap"
+            aria-label={`Call ${site.phones.office.display}`}
           >
             <Phone size={16} aria-hidden />
             {site.phones.office.display}
           </a>
-          <Link href="/contact" className="btn btn-primary text-sm">
+          <Link
+            href="/contact"
+            className="btn btn-primary text-sm whitespace-nowrap"
+          >
             Free Consultation
           </Link>
         </div>
 
         <button
           type="button"
-          className="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-md border border-border bg-cream"
+          className="xl:hidden inline-flex items-center justify-center w-11 h-11 rounded-md border border-border bg-cream shrink-0"
           aria-label="Open menu"
           aria-expanded={mobileOpen}
           aria-controls="mobile-menu"
