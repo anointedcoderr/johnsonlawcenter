@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0B1B2B"/>
+      <stop offset="1" stop-color="#102639"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="80" y="80" width="48" height="3" fill="#B8862B"/>
+  <text x="80" y="180" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="64" fill="#FFFDF8">Johnson Law Center</text>
+  <text x="80" y="240" font-family="Inter, system-ui, sans-serif" font-size="28" fill="#F8F4EC" opacity="0.85">Personal Injury Lawyer in Gloucester, VA</text>
+  <text x="80" y="540" font-family="Inter, system-ui, sans-serif" font-size="22" fill="#B8862B">Free Consultation · 804-694-1111</text>
+</svg>
